@@ -1,9 +1,10 @@
 var map;
 var pos;
+var infowindow 
 
 function initMap() {
   map = new google.maps.Map(document.getElementById('map'), {
-    center: {lat: 40.726173, lng: -74.007114},
+    center: {lat: 35.030246, lng: -90.02517},
     zoom: 12
   });
   infoWindow = new google.maps.InfoWindow({map: map});
@@ -63,11 +64,12 @@ function createMarker(place) {
     position: place.geometry.location
   });
 
-  google.maps.event.addListener(marker, 'click', function() {
+  $('#map').on('click', marker, function(event) {
+    console.log('click');
     infowindow.setContent(place.name);
     infowindow.open(map, this);
   });
-}
+};
 
 
 $(function() {
