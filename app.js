@@ -1,13 +1,12 @@
 var map;
 var pos;
-var infowindow 
 
 function initMap() {
   map = new google.maps.Map(document.getElementById('map'), {
     center: {lat: 35.030246, lng: -90.02517},
     zoom: 12
   });
-  infoWindow = new google.maps.InfoWindow({map: map});
+  var infoWindow = new google.maps.InfoWindow({map: map});
 
   // Try HTML5 geolocation.
   if (navigator.geolocation) {
@@ -18,7 +17,7 @@ function initMap() {
       };
 
       infoWindow.setPosition(pos);
-      infoWindow.setContent('Location found.');
+      infoWindow.setContent('You are here');
       map.setCenter(pos);
     }, function() {
       handleLocationError(true, infoWindow, map.getCenter());
@@ -30,6 +29,8 @@ function initMap() {
 }
 
 function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+  var infoWindow = new google.maps.InfoWindow({map: map});
+
   infoWindow.setPosition(pos);
   infoWindow.setContent(browserHasGeolocation ?
                         'Error: The Geolocation service failed.' :
@@ -38,7 +39,6 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 
 function findGalleries() {
   $(".js-start").on("click", "button", function(event) {
-    var infowindow = new google.maps.InfoWindow();
     var service = new google.maps.places.PlacesService(map);
     service.nearbySearch({
       location: pos,
@@ -63,14 +63,19 @@ function createMarker(place) {
     map: map,
     position: place.geometry.location
   });
+};
 
-  $('#map').on('click', marker, function(event) {
-    console.log('click');
-    infowindow.setContent(place.name);
-    infowindow.open(map, this);
+function readMarkers() {
+ $('#map').on('click', marker, function(event) {
+    var infoWindow = new google.maps.InfoWindow();
+    infoWindow.open(map, this);
+    infoWindow.setContent(place.name);
   });
 };
 
+$(function() {
+  readMarkers();
+});
 
 $(function() {
   initMap();
