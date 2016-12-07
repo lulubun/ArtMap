@@ -63,8 +63,8 @@ function createMarker(place) {
     map: map,
     position: place.geometry.location
   });
+  
  $('#map').on('click', marker, function(event) {
-  console.log('click')
     var infoWindow = new google.maps.InfoWindow();
     infoWindow.open(map, this);
     infoWindow.setContent(place.name);
