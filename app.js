@@ -3,8 +3,8 @@ var pos;
 
 function initMap() {
   map = new google.maps.Map(document.getElementById('map'), {
-    center: {lat: -34.397, lng: 150.644},
-    zoom: 10
+    center: {lat: 40.726173, lng: -74.007114},
+    zoom: 12
   });
   infoWindow = new google.maps.InfoWindow({map: map});
 
@@ -35,8 +35,8 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
                         'Error: Your browser doesn\'t support geolocation.');
 }
 
-$(".js-start").on("click", "button", function(event) {
-  function findGalleries() {
+function findGalleries() {
+  $(".js-start").on("click", "button", function(event) {
     var infowindow = new google.maps.InfoWindow();
     var service = new google.maps.places.PlacesService(map);
     service.nearbySearch({
@@ -44,7 +44,8 @@ $(".js-start").on("click", "button", function(event) {
       radius: 15000,
       type: ['art_gallery']
     }, callback);
-  };
+  });
+}
   
 
 function callback(results, status) {
@@ -68,9 +69,11 @@ function createMarker(place) {
   });
 }
 
-});
-
 
 $(function() {
   initMap();
 });
+
+$(function(){
+  findGalleries();
+})
