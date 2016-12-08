@@ -47,7 +47,7 @@ function findGalleries() {
     }, callback);
   });
 }
-  
+
 
 function callback(results, status) {
   if (status === google.maps.places.PlacesServiceStatus.OK) {
@@ -64,11 +64,17 @@ function createMarker(place) {
     position: place.geometry.location
   });
 
- $('#map').on('click', marker, function(event) {
-  console.log(place.name)
-    var infoWindow = new google.maps.InfoWindow({content: place.name});
-    infoWindow.open(map, this);
+  google.maps.event.addListener(marker, 'click', function() {
+      var infoWindow = new google.maps.InfoWindow({map: map, content: place.name});
+
+      var pos = {
+        lat: marker.position.lat(),
+        lng: marker.position.lng()
+      };
+
+      infoWindow.setPosition(pos);
   });
+  
 };
 
 $(function() {
