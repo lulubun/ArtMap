@@ -7,9 +7,12 @@
 }
 
 #map {
-	height: 500px;
-	width: 99%;
-	border-style: inset;
+	height: 400px;
+	width: 97%;
+	border: 20px solid transparent;
+    -webkit-border-image: url(blackthin.PNG) 30 stretch; /* Safari 3.1-5 */
+    -o-border-image: url(blackthin.PNG) 30 stretch; /* Opera 11-12.1 */
+    border-image: url(blackthin.PNG) 30 stretch;
 }
 
 body {
