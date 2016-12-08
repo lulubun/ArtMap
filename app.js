@@ -3,7 +3,7 @@ var pos;
 
 function initMap() {
   map = new google.maps.Map(document.getElementById('map'), {
-    center: {lat: 35.030246, lng: -90.02517},
+    center: pos,
     zoom: 12
   });
   var infoWindow = new google.maps.InfoWindow({map: map});
@@ -63,11 +63,11 @@ function createMarker(place) {
     map: map,
     position: place.geometry.location
   });
-  
+
  $('#map').on('click', marker, function(event) {
-    var infoWindow = new google.maps.InfoWindow();
+  console.log(place.name)
+    var infoWindow = new google.maps.InfoWindow({content: place.name});
     infoWindow.open(map, this);
-    infoWindow.setContent(place.name);
   });
 };
 
