@@ -1,5 +1,6 @@
 * {
 	font-family: 'Cabin', sans-serif;
+	box-sizing: border-box;
 }
 
 .searchButton {
@@ -8,11 +9,12 @@
 
 #map {
 	height: 400px;
-	width: 97%;
+	width: 75%;
 	border: 20px solid transparent;
     -webkit-border-image: url(blackthin.PNG) 30 stretch; /* Safari 3.1-5 */
     -o-border-image: url(blackthin.PNG) 30 stretch; /* Opera 11-12.1 */
     border-image: url(blackthin.PNG) 30 stretch;
+    float: left;
 }
 
 body {
@@ -21,14 +23,30 @@ body {
 
 h1 {
 	color: #A12F5E;
-	text-shadow: 3px 3px white;
+	text-shadow: 3px 3px #eed5b7;
 	text-align: center;
 }
 
-p {
-	text-shadow: 2px 2px white;
+.pushinfo {
+	text-shadow: 2px 2px #eed5b7;
 }
 
 .js-start {
 	text-align: center;
+}
+
+.mapinfo, .mapbox {
+}
+
+.mapinfo {
+	height: 400px;
+	width:25%;
+	background-color: #A12F5E;
+	float: right;
+	border: solid #cdb79e 3px;
+	color: #eed5b7;
+	padding: 8px;
+}
+.clearfix{
+    clear:both
 }

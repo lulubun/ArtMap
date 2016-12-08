@@ -65,14 +65,17 @@ function createMarker(place) {
   });
 
   google.maps.event.addListener(marker, 'click', function() {
-      var infoWindow = new google.maps.InfoWindow({map: map, content: place.name});
+    var infoWindow = new google.maps.InfoWindow({map: map, content: place.name});
 
-      var pos = {
-        lat: marker.position.lat(),
-        lng: marker.position.lng()
-      };
+    var pos = {
+      lat: marker.position.lat(),
+      lng: marker.position.lng()
+    };
 
-      infoWindow.setPosition(pos);
+    infoWindow.setPosition(pos);
+
+    $('.mapinfo').html('<div><strong>' + place.name + '</strong><br>' + place.formatted_address + '</div>');
+
   });
   
 };
