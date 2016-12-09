@@ -1,5 +1,7 @@
 var map;
 var pos;
+var service;
+var details;
 
 function initMap() {
   map = new google.maps.Map(document.getElementById('map'), {
@@ -39,14 +41,14 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 
 function findGalleries() {
   $(".js-start").on("click", "button", function(event) {
-    var service = new google.maps.places.PlacesService(map);
+    service = new google.maps.places.PlacesService(map);
     service.nearbySearch({
       location: pos,
       radius: 15000,
       type: ['art_gallery']
     }, callback);
   });
-}
+};
 
 
 function callback(results, status) {
@@ -55,7 +57,7 @@ function callback(results, status) {
       createMarker(results[i]);
     }
   }
-}
+};
 
 function createMarker(place) {
   var placeLoc = place.geometry.location;
@@ -74,16 +76,19 @@ function createMarker(place) {
 
     infoWindow.setPosition(pos);
 
-    $('.mapinfo').html('<div><strong>' + place.name + '</strong><br>' + place.formatted_address + '</div>');
-
-  });
+    var request = {placeId: place.place_id};
+    
+    service.getDetails(request, function(placeResult) {
+      $('.mapinfo').html('<div class="js_gallery_info">' + placeResult.name + '<br>' + placeResult.formatted_address + '</div>');
+    });
   
+  });  
 };
 
 $(function() {
   initMap();
 });
 
-$(function(){
+$(function() {
   findGalleries();
-})
+});

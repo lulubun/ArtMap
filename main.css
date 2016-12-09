@@ -47,6 +47,10 @@ h1 {
 	color: #eed5b7;
 	padding: 8px;
 }
-.clearfix{
+.clearfix {
     clear:both
+}
+
+.js_gallery_info {
+	text-align: center;
 }
