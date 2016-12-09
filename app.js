@@ -79,7 +79,8 @@ function createMarker(place) {
     var request = {placeId: place.place_id};
     
     service.getDetails(request, function(placeResult) {
-      $('.mapinfo').html('<div class="js_gallery_info">' + placeResult.name + '<br>' + placeResult.formatted_address + '</div>');
+      $('.mapinfo').html('<div class="js_gallery_info">' + '<div class="js_gallery_name">' + placeResult.name + '</div>' + 
+      '<br>' + '<div class="js_gallery_address">' + placeResult.formatted_address + '</div>' + '</div>');
     });
   
   });  

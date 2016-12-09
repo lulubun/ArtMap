@@ -51,6 +51,11 @@ h1 {
     clear:both
 }
 
-.js_gallery_info {
+.js_gallery_name {
 	text-align: center;
+}
+
+.js_gallery_address {
+	font-style: bold;
+	font-size: 25px;
 }
