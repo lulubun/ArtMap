@@ -4,6 +4,7 @@
 	<meta charset="utf-8">
   	<meta name="viewport" content="width=device-width">
   	<link rel="stylesheet" type="text/css" href="main.css">
+  	<link rel="stylesheet" type="text/css" href="float_grid.css">
 	<title>Art Map</title>
 </head>
 <body>
@@ -12,10 +13,23 @@
 </header>
 <main>
 <div class="js-start">
+	<div class="dropdown">
+  		<button class="dropbtn">Choose Search Area</button>
+  			<div id="myDropdown" class="dropdown-content">
+  			  <select id="mySelect" size="3">
+    			<option class="choice" value="8047">5 miles</option>
+    			<option class="choice" value="16094">10 miles</option>
+    			<option class="choice" value="40234">25 miles</option>
+    		  </select>	
+  			</div>
+	</div>
 	<p class="pushinfo">Press the button below to find local art!</p>
-	<button class="searchButton">Find some!</button>
+	<div class="markerButton">
+		<button class="searchButton">Find some!</button>
+	</div>	
+	
 </div>
-<div class="mapbox">
+<div class="mapbox" class="row">
 	<div id="map"></div>
 </div>
 <div class="mapinfo">

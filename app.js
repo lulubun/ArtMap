@@ -1,8 +1,10 @@
+//Global Variables
 var map;
 var pos;
 var service;
 var details;
 
+//Display's GPS map
 function initMap() {
   map = new google.maps.Map(document.getElementById('map'), {
     center: pos,
@@ -10,7 +12,7 @@ function initMap() {
   });
   var infoWindow = new google.maps.InfoWindow({map: map});
 
-  // Try HTML5 geolocation.
+  //geolocation.
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(function(position) {
       pos = {
@@ -30,6 +32,7 @@ function initMap() {
   }
 }
 
+//if someone is using a really old browser
 function handleLocationError(browserHasGeolocation, infoWindow, pos) {
   var infoWindow = new google.maps.InfoWindow({map: map});
 
@@ -39,18 +42,19 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
                         'Error: Your browser doesn\'t support geolocation.');
 }
 
+//finds all the galleries
 function findGalleries() {
-  $(".js-start").on("click", "button", function(event) {
+  $(".markerButton").on("click", "button", function(event) {
     service = new google.maps.places.PlacesService(map);
     service.nearbySearch({
       location: pos,
-      radius: 15000,
+      radius: radSend,
       type: ['art_gallery']
     }, callback);
   });
 };
 
-
+//takes info and goes through a loop for all results and calls createMarker
 function callback(results, status) {
   if (status === google.maps.places.PlacesServiceStatus.OK) {
     for (var i = 0; i < results.length; i++) {
@@ -59,13 +63,14 @@ function callback(results, status) {
   }
 };
 
+//puts markers on the map
 function createMarker(place) {
   var placeLoc = place.geometry.location;
   var marker = new google.maps.Marker({
     map: map,
     position: place.geometry.location
   });
-
+//when you click on the marker it makes the name pop up
   google.maps.event.addListener(marker, 'click', function() {
     var infoWindow = new google.maps.InfoWindow({map: map, content: place.name});
 
@@ -75,16 +80,23 @@ function createMarker(place) {
     };
 
     infoWindow.setPosition(pos);
-
+//gets details of the specific location and puts the details in the sidebar
     var request = {placeId: place.place_id};
     
     service.getDetails(request, function(placeResult) {
       $('.mapinfo').html('<div class="js_gallery_info">' + '<div class="js_gallery_name">' + placeResult.name + '</div>' + 
-      '<br>' + '<div class="js_gallery_address">' + placeResult.formatted_address + '</div>' + '</div>');
+      '<br>' + '<div class="js_gallery_address">' + placeResult.formatted_address + '</div>' + '<br>' + '<a href=' 
+      + placeResult.website + '>' + placeResult.name + ' Website' + '</a>' + '</div>');
     });
   
   });  
 };
+
+//event listeners
+
+$(function() {
+  dropList();
+})
 
 $(function() {
   initMap();
@@ -93,3 +105,50 @@ $(function() {
 $(function() {
   findGalleries();
 });
+
+$(function() {
+  chooseDistance();
+})
+
+//make the dropdown list
+/* When the user clicks on the button, 
+toggle between hiding and showing the dropdown content */
+function dropList() {
+  $(".dropdown").on("click", "button", function(event) {
+    document.getElementById("myDropdown").classList.toggle("show");
+  });
+}
+
+// Close the dropdown menu if the user clicks outside of it
+window.onclick = function(event) {
+  if (!event.target.matches('.dropbtn')) {
+
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+}
+
+var radSend;
+
+function chooseDistance() {
+   $(".choice").click(function(event) {
+      var radChoice = document.getElementById("mySelect");
+      radSend = radChoice.options[radChoice.selectedIndex].value;
+    
+    /*document.getElementById("myDropdown").classList.toggle("show");
+  });
+  if ($('input[name=choice]:checked', '#quiz').val()==state.questionArray[state.currentQuestion].correctAnswer) {
+    state.numRight+=1;
+    $('.commentary').text("Correct!");
+    $('.numRight').text(state.numRight);
+  }
+  else {
+    $('.commentary').text("Nope!")*/
+   }); 
+};

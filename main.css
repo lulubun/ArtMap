@@ -3,13 +3,72 @@
 	box-sizing: border-box;
 }
 
-.searchButton {
-	margin-bottom: 10px;
+body {
+  background-image: 
+    linear-gradient(
+      rgba(0, 0, 0, 0.5),
+      rgba(0, 0, 0, 0.5)
+    ),
+    url("http://ichef.bbci.co.uk/wwfeatures/wm/live/1280_640/images/live/p0/2v/hq/p02vhq1v.jpg");
 }
 
+.searchButton {
+	margin-bottom: 10px;
+	background-color: #A12F5E;
+	color: #eed5b7;
+	padding: 10px;
+	font-size: 12px;
+	cursor: pointer;
+}
+
+/* Dropdown Button */
+.dropbtn {
+    background-color: #A12F5E;
+    color: #eed5b7;
+    padding: 10px;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+/* Dropdown button on hover & focus */
+.dropbtn:hover, .dropbtn:focus {
+    background-color: black;
+}
+
+.searchButton:hover, .searchButton:focus {
+    background-color: black;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: white;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {background-color: white}
+
+/* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
+.show {display:block;}
+
 #map {
-	height: 400px;
-	width: 75%;
 	border: 20px solid transparent;
     -webkit-border-image: url(blackthin.PNG) 30 stretch; /* Safari 3.1-5 */
     -o-border-image: url(blackthin.PNG) 30 stretch; /* Opera 11-12.1 */
@@ -17,9 +76,6 @@
     float: left;
 }
 
-body {
-	background-image: url("http://ichef.bbci.co.uk/wwfeatures/wm/live/1280_640/images/live/p0/2v/hq/p02vhq1v.jpg");
-}
 
 h1 {
 	color: #A12F5E;
@@ -28,19 +84,16 @@ h1 {
 }
 
 .pushinfo {
-	text-shadow: 2px 2px #eed5b7;
+	color: #A12F5E;
+	font-size: 25px;
+	text-shadow: 0.5px 0.5px #eed5b7;
 }
 
 .js-start {
 	text-align: center;
 }
 
-.mapinfo, .mapbox {
-}
-
 .mapinfo {
-	height: 400px;
-	width:25%;
 	background-color: #A12F5E;
 	float: right;
 	border: solid #cdb79e 3px;
