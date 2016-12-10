@@ -3,12 +3,13 @@ var map;
 var pos;
 var service;
 var details;
+var markers = [];
 
 //Display's GPS map
 function initMap() {
   map = new google.maps.Map(document.getElementById('map'), {
     center: pos,
-    zoom: 12
+    zoom: 10
   });
   var infoWindow = new google.maps.InfoWindow({map: map});
 
@@ -70,7 +71,14 @@ function createMarker(place) {
     map: map,
     position: place.geometry.location
   });
-//when you click on the marker it makes the name pop up
+
+  function setMapOnAll(map) {
+    for (var i = 0; i < markers.length; i++) {
+      markers[i].setMap(map);
+    }
+  }
+
+  //when you click on the marker it makes the name pop up
   google.maps.event.addListener(marker, 'click', function() {
     var infoWindow = new google.maps.InfoWindow({map: map, content: place.name});
 
@@ -80,7 +88,7 @@ function createMarker(place) {
     };
 
     infoWindow.setPosition(pos);
-//gets details of the specific location and puts the details in the sidebar
+    //gets details of the specific location and puts the details in the sidebar
     var request = {placeId: place.place_id};
     
     service.getDetails(request, function(placeResult) {
@@ -88,7 +96,6 @@ function createMarker(place) {
       '<br>' + '<div class="js_gallery_address">' + placeResult.formatted_address + '</div>' + '<br>' + '<a href=' 
       + placeResult.website + '>' + placeResult.name + ' Website' + '</a>' + '</div>');
     });
-  
   });  
 };
 
@@ -114,7 +121,7 @@ $(function() {
 /* When the user clicks on the button, 
 toggle between hiding and showing the dropdown content */
 function dropList() {
-  $(".dropdown").on("click", "button", function(event) {
+  $(".dropdown").on("click", "button", function(event) {    
     document.getElementById("myDropdown").classList.toggle("show");
   });
 }
@@ -134,21 +141,12 @@ window.onclick = function(event) {
   }
 }
 
+//get user's choice for radius
 var radSend;
 
 function chooseDistance() {
-   $(".choice").click(function(event) {
-      var radChoice = document.getElementById("mySelect");
-      radSend = radChoice.options[radChoice.selectedIndex].value;
-    
-    /*document.getElementById("myDropdown").classList.toggle("show");
+  $(".choice").click(function(event) {
+  var radChoice = document.getElementById("mySelect");
+  radSend = radChoice.options[radChoice.selectedIndex].value; 
   });
-  if ($('input[name=choice]:checked', '#quiz').val()==state.questionArray[state.currentQuestion].correctAnswer) {
-    state.numRight+=1;
-    $('.commentary').text("Correct!");
-    $('.numRight').text(state.numRight);
-  }
-  else {
-    $('.commentary').text("Nope!")*/
-   }); 
 };
