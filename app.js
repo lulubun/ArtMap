@@ -55,9 +55,17 @@ function findGalleries() {
   });
 };
 
+function setMapOnAll(map) {
+  for (var i = 0; i < markers.length; i++) {
+    markers[i].setMap(map);
+  }
+  markers = [];
+}    
+
 //takes info and goes through a loop for all results and calls createMarker
 function callback(results, status) {
   if (status === google.maps.places.PlacesServiceStatus.OK) {
+    setMapOnAll(null);
     for (var i = 0; i < results.length; i++) {
       createMarker(results[i]);
     }
@@ -72,11 +80,7 @@ function createMarker(place) {
     position: place.geometry.location
   });
 
-  function setMapOnAll(map) {
-    for (var i = 0; i < markers.length; i++) {
-      markers[i].setMap(map);
-    }
-  }
+  markers.push(marker);
 
   //when you click on the marker it makes the name pop up
   google.maps.event.addListener(marker, 'click', function() {
