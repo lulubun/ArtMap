@@ -4,6 +4,7 @@ var pos;
 var service;
 var details;
 var markers = [];
+var destination;
 
 //Display's GPS map
 function initMap() {
@@ -38,29 +39,17 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
   var infoWindow = new google.maps.InfoWindow({map: map});
 
   infoWindow.setPosition(pos);
-  infoWindow.setContent(browserHasGeolocation ?
-                        'Error: The Geolocation service failed.' :
-                        'Error: Your browser doesn\'t support geolocation.');
+  infoWindow.setContent(browserHasGeolocation ? 'Error: The Geolocation service failed.' : 'Error: Your browser doesn\'t support geolocation.');
 }
 
-//finds all the galleries
-function findGalleries() {
-  $(".markerButton").on("click", "button", function(event) {
-    service = new google.maps.places.PlacesService(map);
-    service.nearbySearch({
-      location: pos,
-      radius: radSend,
-      type: ['art_gallery']
-    }, callback);
-  });
-};
 
+//set markers on the map
 function setMapOnAll(map) {
   for (var i = 0; i < markers.length; i++) {
     markers[i].setMap(map);
   }
   markers = [];
-}    
+}
 
 //takes info and goes through a loop for all results and calls createMarker
 function callback(results, status) {
@@ -72,7 +61,7 @@ function callback(results, status) {
   }
 };
 
-//puts markers on the map
+//creates markers array
 function createMarker(place) {
   var placeLoc = place.geometry.location;
   var marker = new google.maps.Marker({
@@ -94,38 +83,27 @@ function createMarker(place) {
     infoWindow.setPosition(pos);
     //gets details of the specific location and puts the details in the sidebar
     var request = {placeId: place.place_id};
-    
+
     service.getDetails(request, function(placeResult) {
-      $('.mapinfo').html('<div class="js_gallery_info">' + '<div class="js_gallery_name">' + placeResult.name + '</div>' + 
-      '<br>' + '<div class="js_gallery_address">' + placeResult.formatted_address + '</div>' + '<br>' + '<a href=' 
-      + placeResult.website + '>' + placeResult.name + ' Website' + '</a>' + '</div>');
+      destination = place.place_id;
+      if (placeResult.website == undefined) {
+        $('.mapinfo').html('<div class="js_gallery_info"> <div class="js_gallery_name">' + placeResult.name +
+        '</div> <br> <div class="js_gallery_address">' + placeResult.formatted_address + '</div> <br> <div class="directButton"> <button onclick="getDirections(destination)" class="directions">Get driving directions</button> </div> </div>');
+      } else {
+        $('.mapinfo').html('<div class="js_gallery_info"> <div class="js_gallery_name">' + placeResult.name +
+        '</div> <br> <div class="js_gallery_address">' + placeResult.formatted_address + '</div> <br> <a href="' +
+        placeResult.website + '">' + placeResult.name + ' Website</a> <br> <div class="directButton"> <button onclick="getDirections(destination)" class="directions">Get driving directions</button> </div> </div>');
+      }
     });
-  });  
+  });
 };
 
-//event listeners
-
-$(function() {
-  dropList();
-})
-
-$(function() {
-  initMap();
-});
-
-$(function() {
-  findGalleries();
-});
-
-$(function() {
-  chooseDistance();
-})
 
 //make the dropdown list
-/* When the user clicks on the button, 
+/* When the user clicks on the button,
 toggle between hiding and showing the dropdown content */
 function dropList() {
-  $(".dropdown").on("click", "button", function(event) {    
+  $(".dropdown").on("click", "button", function(event) {
     document.getElementById("myDropdown").classList.toggle("show");
   });
 }
@@ -133,7 +111,6 @@ function dropList() {
 // Close the dropdown menu if the user clicks outside of it
 window.onclick = function(event) {
   if (!event.target.matches('.dropbtn')) {
-
     var dropdowns = document.getElementsByClassName("dropdown-content");
     var i;
     for (i = 0; i < dropdowns.length; i++) {
@@ -151,6 +128,71 @@ var radSend;
 function chooseDistance() {
   $(".choice").click(function(event) {
   var radChoice = document.getElementById("mySelect");
-  radSend = radChoice.options[radChoice.selectedIndex].value; 
+  radSend = radChoice.options[radChoice.selectedIndex].value;
+  findGalleries(radSend)
   });
 };
+
+//finds all the galleries
+function findGalleries() {
+  service = new google.maps.places.PlacesService(map);
+  service.nearbySearch({
+    location: pos,
+    radius: radSend,
+    type: ['art_gallery']
+  }, callback);
+};
+
+function setDirections(finalText) {
+  console.log(finalText);
+  $("#directionsBox").html(finalText);
+}
+
+function getDirections(destination) {
+  $(".directButton").click(function(event) {
+    var posLat = pos.lat;
+    var posLng = pos.lng;
+    console.log(destination);
+    fetch('https://maps.googleapis.com/maps/api/directions/json?origin=' + posLat + ',' + posLng + '&destination=place_id:' + destination + '&key=AIzaSyCN1lLkyO9jAuO7S3JXtWBXoD12JdUPZD0')
+    .then(
+      function(response) {
+        if (response.status !== 200) {
+          console.log('Looks like there was a problem. Status Code: ' + response.status);
+          return;
+        }
+
+        // Examine the text in the response
+        response.json().then(function(data) {
+          var directionsText = '';
+          directArry = data.routes[0].legs[0].steps
+          for (var i = 0; i < directArry.length; i++) {
+            console.log(directArry[i].html_instructions);
+            directionsText.concat('<li>' + directArry[i].html_instructions + '</li>')
+          }
+
+        //concat() method is wrong!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+          console.log(directionsText);
+          var finalText = '<ul>' + directionsText + '</ul>';
+          setDirections(finalText);
+        });
+      }
+    )
+    .catch(function(err) {
+      console.log('Fetch Error :-S', err);
+    });
+  })
+}
+
+//event listeners
+
+$(function() {
+  dropList();
+})
+
+$(function() {
+  initMap();
+});
+
+$(function() {
+  chooseDistance();
+})
