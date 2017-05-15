@@ -167,12 +167,12 @@ function getDirections(destination) {
           directArry = data.routes[0].legs[0].steps
           for (var i = 0; i < directArry.length; i++) {
             console.log(directArry[i].html_instructions);
-            directionsText.concat('<li>' + directArry[i].html_instructions + '</li>')
+            directionsText += '<li class="oneItem">' + directArry[i].html_instructions + '</li>'
           }
 
         //concat() method is wrong!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
           console.log(directionsText);
-          var finalText = '<ul>' + directionsText + '</ul>';
+          var finalText = '<div class="showUp" <ul class="listUp">' + directionsText + '</ul> </div>';
           setDirections(finalText);
         });
       }

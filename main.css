@@ -148,3 +148,22 @@ a {
 .directions:hover, .directions:focus {
 	background-color: black;
 }
+
+.showUp {
+	background-color: black;
+	color: #eed5b7;
+	padding-left: 20px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	border: solid #cdb79e 3px;
+
+}
+
+.listUp {
+	margin-left: 20px;
+	padding-bottom: 5px;
+}
+
+.oneItem {
+	padding-top: 5px;
+}
