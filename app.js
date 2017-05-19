@@ -153,7 +153,15 @@ function getDirections(destination) {
     var posLat = pos.lat;
     var posLng = pos.lng;
     console.log(destination);
-    fetch('https://maps.googleapis.com/maps/api/directions/json?origin=' + posLat + ',' + posLng + '&destination=place_id:' + destination + '&key=AIzaSyCN1lLkyO9jAuO7S3JXtWBXoD12JdUPZD0')
+    var url = 'https://maps.googleapis.com/maps/api/directions/json?origin=' + posLat + ',' + posLng + '&destination=place_id:' + destination + '&key=AIzaSyCN1lLkyO9jAuO7S3JXtWBXoD12JdUPZD0';
+    fetch(url, {
+      method: 'GET',
+      mode: 'cors',
+      headers:{
+        'Access-Control-Allow-Origin': '*'
+      },
+      body:null,
+    })
     .then(
       function(response) {
         if (response.status !== 200) {
