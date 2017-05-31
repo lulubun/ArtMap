@@ -41,7 +41,7 @@
    * Half a gutter is 10px, 10/960 (context) = 1.041666%
    *
    */
-  
+
   padding-right: 1.04166666%;
 }
 
@@ -57,10 +57,10 @@
   /* 3 columns, 3/12 in % */
   #map {
     width: 75%;
-    height: 500px;
+    height: 400px;
   }
 
   .mapinfo {
     width: 25%;
-    height: 500px;
+    height: 400px;
   }

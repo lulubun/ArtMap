@@ -44,7 +44,8 @@ body {
 .dropdown {
     position: relative;
     display: inline-block;
-		padding-bottom: 80px;
+		padding-bottom: 10px;
+		z-index: 1;
 }
 
 /* Dropdown Content (Hidden by Default) */

@@ -73,6 +73,8 @@ function createMarker(place) {
 
   //when you click on the marker it makes the name pop up
   google.maps.event.addListener(marker, 'click', function() {
+    $("#directionsBox").html('');
+
     var infoWindow = new google.maps.InfoWindow({map: map, content: place.name});
 
     var pos = {
@@ -157,7 +159,7 @@ function getDirections(destination) {
     var posLat = pos.lat;
     var posLng = pos.lng;
     var url = 'https://crossorigin.me/https://maps.googleapis.com/maps/api/directions/json?origin=' + posLat + ',' + posLng + '&destination=place_id:' + destination + '&key=AIzaSyCN1lLkyO9jAuO7S3JXtWBXoD12JdUPZD0';
-
+    console.log('clicked directions');
     $.ajax(url, {
       method: 'GET',
     //  mode: 'cors',
