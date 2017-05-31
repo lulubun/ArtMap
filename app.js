@@ -88,11 +88,15 @@ function createMarker(place) {
       destination = place.place_id;
       if (placeResult.website == undefined) {
         $('.mapinfo').html('<div class="js_gallery_info"> <div class="js_gallery_name">' + placeResult.name +
-        '</div> <br> <div class="js_gallery_address">' + placeResult.formatted_address + '</div> <br> <div class="directButton"> <button onclick="getDirections(destination)" class="directions">Get driving directions</button> </div> </div>');
+        '</div> <br> <div class="js_gallery_address">' + placeResult.formatted_address + '</div>'
+      //  '<br> <div class="directButton"> <button onclick="getDirections(destination)" class="directions">Get driving directions</button> </div>
+       + '</div>');
       } else {
         $('.mapinfo').html('<div class="js_gallery_info"> <div class="js_gallery_name">' + placeResult.name +
         '</div> <br> <div class="js_gallery_address">' + placeResult.formatted_address + '</div> <br> <a href="' +
-        placeResult.website + '">' + placeResult.name + ' Website</a> <br> <div class="directButton"> <button onclick="getDirections(destination)" class="directions">Get driving directions</button> </div> </div>');
+        placeResult.website + '">' + placeResult.name + ' Website</a>'
+        + '<br> <div class="directButton"> <button onclick="getDirections(destination)" class="directions">Get driving directions</button> </div>'
+      + '</div>');
       }
     });
   });
@@ -152,41 +156,29 @@ function getDirections(destination) {
   $(".directButton").click(function(event) {
     var posLat = pos.lat;
     var posLng = pos.lng;
-    console.log(destination);
     var url = 'https://maps.googleapis.com/maps/api/directions/json?origin=' + posLat + ',' + posLng + '&destination=place_id:' + destination + '&key=AIzaSyCN1lLkyO9jAuO7S3JXtWBXoD12JdUPZD0';
-    fetch(url, {
+
+    $.ajax(url, {
       method: 'GET',
-      mode: 'cors',
-      headers:{
-        'Access-Control-Allow-Origin': '*'
-      },
-      body:null,
+    //  mode: 'cors',
+      'Content-Type': 'application/json',
+      // headers:{
+      //   'Access-Control-Allow-Origin': '*'
+      // }
     })
-    .then(
-      function(response) {
-        if (response.status !== 200) {
-          console.log('Looks like there was a problem. Status Code: ' + response.status);
-          return;
-        }
-
-        // Examine the text in the response
-        response.json().then(function(data) {
-          var directionsText = '';
-          directArry = data.routes[0].legs[0].steps
-          for (var i = 0; i < directArry.length; i++) {
-            console.log(directArry[i].html_instructions);
-            directionsText += '<li class="oneItem">' + directArry[i].html_instructions + '</li>'
-          }
-
-        //concat() method is wrong!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-          console.log(directionsText);
-          var finalText = '<div class="showUp" <ul class="listUp">' + directionsText + '</ul> </div>';
-          setDirections(finalText);
-        });
+    .then(function(data) {
+      var directionsText = '';
+      directArry = data.routes[0].legs[0].steps
+      for (var i = 0; i < directArry.length; i++) {
+        console.log(directArry[i].html_instructions);
+        directionsText += '<li class="oneItem">' + directArry[i].html_instructions + '</li>'
       }
-    )
+      console.log(directionsText);
+      var finalText = '<div class="showUp" <ul class="listUp">' + directionsText + '</ul> </div>';
+      setDirections(finalText);
+    })
     .catch(function(err) {
-      console.log('Fetch Error :-S', err);
+      console.log('Fetch Error', err);
     });
   })
 }
