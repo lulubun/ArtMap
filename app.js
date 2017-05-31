@@ -162,9 +162,9 @@ function getDirections(destination) {
       method: 'GET',
     //  mode: 'cors',
       'Content-Type': 'application/json',
-      headers:{
-        'Access-Control-Allow-Origin': '*'
-      }
+      // headers:{
+      //   'Access-Control-Allow-Origin': '*'
+      // }
     })
     .then(function(data) {
       var directionsText = '';
