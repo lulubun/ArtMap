@@ -95,7 +95,7 @@ function createMarker(place) {
         $('.mapinfo').html('<div class="js_gallery_info"> <div class="js_gallery_name">' + placeResult.name +
         '</div> <br> <div class="js_gallery_address">' + placeResult.formatted_address + '</div> <br> <a href="' +
         placeResult.website + '">' + placeResult.name + ' Website</a>'
-        //<br> <div class="directButton"> <button onclick="getDirections(destination)" class="directions">Get driving directions</button> </div>
+        + '<br> <div class="directButton"> <button onclick="getDirections(destination)" class="directions">Get driving directions</button> </div>'
       + '</div>');
       }
     });
@@ -160,7 +160,7 @@ function getDirections(destination) {
 
     $.ajax(url, {
       method: 'GET',
-      mode: 'cors',
+    //  mode: 'cors',
       'Content-Type': 'application/json',
       headers:{
         'Access-Control-Allow-Origin': '*'
