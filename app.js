@@ -156,7 +156,7 @@ function getDirections(destination) {
   $(".directButton").click(function(event) {
     var posLat = pos.lat;
     var posLng = pos.lng;
-    var url = 'https://maps.googleapis.com/maps/api/directions/json?origin=' + posLat + ',' + posLng + '&destination=place_id:' + destination + '&key=AIzaSyCN1lLkyO9jAuO7S3JXtWBXoD12JdUPZD0';
+    var url = 'https://crossorigin.me/https://maps.googleapis.com/maps/api/directions/json?origin=' + posLat + ',' + posLng + '&destination=place_id:' + destination + '&key=AIzaSyCN1lLkyO9jAuO7S3JXtWBXoD12JdUPZD0';
 
     $.ajax(url, {
       method: 'GET',
