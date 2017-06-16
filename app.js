@@ -96,7 +96,7 @@ function createMarker(place) {
       } else {
         $('.mapinfo').html('<div class="js_gallery_info"> <div class="js_gallery_name">' + placeResult.name +
         '</div> <br> <div class="js_gallery_address">' + placeResult.formatted_address + '</div> <br> <a href="' +
-        placeResult.website + '">' + placeResult.name + ' Website</a>'
+        placeResult.website + '"><button class="directions">' + placeResult.name + ' Website</button></a>'
         + '<br> <div class="directButton"> <button onclick="getDirections(destination)" class="directions">Get driving directions</button> </div>'
       + '</div>');
       }
