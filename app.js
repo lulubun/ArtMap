@@ -5,6 +5,7 @@ var service;
 var details;
 var markers = [];
 var destination;
+var infoWindow = null;
 
 //Display's GPS map
 function initMap() {
@@ -25,6 +26,7 @@ function initMap() {
       infoWindow.setPosition(pos);
       infoWindow.setContent('You are here');
       map.setCenter(pos);
+      findGalleries("40234");
     }, function() {
       handleLocationError(true, infoWindow, map.getCenter());
     });
@@ -75,7 +77,11 @@ function createMarker(place) {
   google.maps.event.addListener(marker, 'click', function() {
     $("#directionsBox").html('');
 
-    var infoWindow = new google.maps.InfoWindow({map: map, content: place.name});
+    if(infoWindow) {
+      infoWindow.close(map, marker);
+    }
+
+    infoWindow = new google.maps.InfoWindow({map: map, content: place.name});
 
     var pos = {
       lat: marker.position.lat(),
@@ -90,13 +96,13 @@ function createMarker(place) {
       destination = place.place_id;
       if (placeResult.website == undefined) {
         $('.mapinfo').html('<div class="js_gallery_info"> <div class="js_gallery_name">' + placeResult.name +
-        '</div> <br> <div class="js_gallery_address">' + placeResult.formatted_address + '</div>'
-        '<br> <div class="directButton"> <button onclick="getDirections(destination)" class="directions">Get driving directions</button> </div>
-        </div>');
+        '</div> <br> <div class="js_gallery_address">' + placeResult.formatted_address + '</div>' +
+        '<br> <div class="directButton"> <button onclick="getDirections(destination)" class="directions">Get driving directions</button> </div>' +
+        '</div>');
       } else {
         $('.mapinfo').html('<div class="js_gallery_info"> <div class="js_gallery_name">' + placeResult.name +
         '</div> <br> <div class="js_gallery_address">' + placeResult.formatted_address + '</div> <br> <a href="' +
-        placeResult.website + '"><button class="directions">' + placeResult.name + ' Website</button></a>'
+        placeResult.website + '" target="_blank"><button class="directions">' + placeResult.name + ' Website</button></a>'
         + '<br> <div class="directButton"> <button onclick="getDirections(destination)" class="directions">Get driving directions</button> </div>'
       + '</div>');
       }
@@ -140,7 +146,7 @@ function chooseDistance() {
 };
 
 //finds all the galleries
-function findGalleries() {
+function findGalleries(radSend) {
   service = new google.maps.places.PlacesService(map);
   service.nearbySearch({
     location: pos,
@@ -189,12 +195,6 @@ function getDirections(destination) {
 
 $(function() {
   dropList();
-})
-
-$(function() {
   initMap();
-});
-
-$(function() {
   chooseDistance();
 })
