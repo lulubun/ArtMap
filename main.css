@@ -14,8 +14,8 @@ body {
 
 .searchButton {
 	margin-bottom: 10px;
-	background-color: #A12F5E;
-	color: #eed5b7;
+	background-color: #A4243B;
+	color: #EBDAC6;
 	padding: 10px;
 	font-size: 12px;
 	cursor: pointer;
@@ -24,8 +24,8 @@ body {
 
 /* Dropdown Button */
 .dropbtn {
-    background-color: #A12F5E;
-    color: #eed5b7;
+    background-color: #A4243B;
+    color: #EBDAC6;
     padding: 10px;
     font-size: 12px;
     cursor: pointer;
@@ -52,13 +52,13 @@ body {
 .dropdown-content {
     display: none;
     position: absolute;
-    background-color: #eed5b7;
+    background-color: #EBDAC6;
     /*min-width: 160px;*/
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
 }
 
 /* Change color of dropdown links on hover */
-.dropdown-content option:hover {color: #A12F5E;	background-color: black;}
+.dropdown-content option:hover {color: #A4243B;	background-color: black;}
 
 /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
 .show {display:block;}
@@ -73,15 +73,16 @@ body {
 
 
 h1 {
-	color: #A12F5E;
-	text-shadow: 3px 3px #eed5b7;
+	color: #EBDAC6;
+	/*text-shadow: 3px 3px #EBDAC6;*/
 	text-align: center;
+	font-size: 4em;
 }
 
 .pushinfo {
-	color: #A12F5E;
+	color: #A4243B;
 	font-size: 25px;
-	text-shadow: 0.5px 0.5px #eed5b7;
+	text-shadow: 0.5px 0.5px #EBDAC6;
 }
 
 .js-start {
@@ -89,10 +90,10 @@ h1 {
 }
 
 .mapinfo {
-	background-color: #A12F5E;
+	background-color: #A4243B;
 	float: right;
 	border: solid #cdb79e 3px;
-	color: #eed5b7;
+	color: #EBDAC6;
 	padding: 8px;
 }
 .clearfix {
@@ -120,7 +121,7 @@ select {
 	outline:none; /* remove focus ring from Webkit */
 	line-height: 1.2;
 	background: #000;
-	color: #eed5b7;
+	color: #EBDAC6;
 	border:0;
 	width: 135px;
 	overflow: hidden;
@@ -138,8 +139,8 @@ a {
 	display: block;
 	margin: auto;
 	margin-top: 10px;
-	background-color: #A12F5E;
-	color: #eed5b7;
+	background-color: #A4243B;
+	color: #EBDAC6;
 	padding: 10px;
 	font-size: 12px;
 	cursor: pointer;
@@ -151,8 +152,8 @@ a {
 }
 
 .showUp {
-	background-color: black;
-	color: #eed5b7;
+	background-color: #EBDAC6;
+	color: black;
 	padding-left: 20px;
 	padding-top: 10px;
 	padding-bottom: 10px;
