@@ -1,6 +1,6 @@
 <h1>Art Map</h1>
 <p><a href="https://lulubun.github.io/ArtMap/">Art Map</a> is a responsive front-end app that helps users find local art from any location.</p>
-<img src="responsiveArt.png">
+<img src="responsiveArt2.png">
 
 ## Getting started
 ### Installing
