@@ -2,23 +2,6 @@
 <p><a href="https://lulubun.github.io/ArtMap/">Art Map</a> is a responsive front-end app that helps users find local art from any location.</p>
 <img src="responsiveArt2.png">
 
-## Getting started
-### Installing
-```
->   git clone https://github.com/lulubun/ArtMap.git
->   cd ArtMap
->   npm install
-```
-### Launching
-```
->   npm start
-```
-Then open [`localhost:8000`](http://localhost:8000) in a browser.
-### Testing
-```
->   npm run test
-```
-
 <h2>Introduction</h2>
 <p>There is always local art to discover wherever you are. Art Map uses geolocation to find local art galleries from the user's location. Art Map also provides website information and driving directions to the gallery.</p>
 
