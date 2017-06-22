@@ -1,5 +1,5 @@
 * {
-	font-family: 'Cabin', sans-serif;
+	font-family: 'Nunito', sans-serif;
 	box-sizing: border-box;
 }
 
@@ -10,6 +10,11 @@ body {
       rgba(0, 0, 0, 0.5)
     ),
     url("http://ichef.bbci.co.uk/wwfeatures/wm/live/1280_640/images/live/p0/2v/hq/p02vhq1v.jpg");
+}
+
+button {
+	border: 0.5px solid black;
+	border-radius: 5px;
 }
 
 .searchButton {
@@ -29,6 +34,7 @@ body {
   padding: 7px;
   font-size: 12px;
   cursor: pointer;
+	border: 0.5px solid #EBDAC6;
 }
 
 /* Dropdown button on hover & focus */
@@ -66,10 +72,8 @@ body {
 .show {display:block;}
 
 #map {
-	border: 20px solid transparent;
-  -webkit-border-image: url(blackthin.PNG) 30 stretch; /* Safari 3.1-5 */
-  -o-border-image: url(blackthin.PNG) 30 stretch; /* Opera 11-12.1 */
-  border-image: url(blackthin.PNG) 30 stretch;
+	border: solid #cdb79e 3px;
+	border-radius: 5px;
   float: left;
 }
 
@@ -99,6 +103,7 @@ body {
 	background-color: #A4243B;
 	float: right;
 	border: solid #cdb79e 3px;
+	border-radius: 5px;
 	color: #EBDAC6;
 	padding: 8px;
 }
@@ -115,8 +120,8 @@ body {
 
 .js_gallery_address {
 	padding-top: 10px;
-	font-size: 25px;
-	text-align: left;
+	font-size: 16px;
+	text-align: center;
 }
 
 select {
@@ -164,6 +169,7 @@ a {
 	padding-top: 10px;
 	padding-bottom: 10px;
 	border: solid #cdb79e 3px;
+	border-radius: 5px;
 
 }
 
